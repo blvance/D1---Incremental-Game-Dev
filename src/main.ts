@@ -11,9 +11,7 @@ let burgerPower: number = 1;
 let shrekCost: number = 100;
 let shrek: number = 0;
 let shrekPower: number = 0;
-// Shrek generates 1 Dookie per second for each Shrek owned
 
-// Every second, add Dookie based on number of Shreks owned
 setInterval(() => {
   if (shrek > 0) {
     counter += shrekPower;
@@ -33,6 +31,7 @@ document.body.innerHTML = `
   <p>Cost: <span id="shrekCost">${shrekCost}</span> +${shrek} per second <p>
   <button id="shrekUpgrade"> Shrek </button>
 
+  <p>Shreks Owned: <span id="shrekPower">0</span></p>
 `;
 
 // Add click handler
@@ -53,6 +52,7 @@ burgerUpgrade.addEventListener("click", () => {
   if (counter >= burgerCost) {
     counter -= burgerCost;
     clickPower += burgerPower;
+    burgerPower += Math.floor(burgerPower * 1.33);
     burgerCost = Math.floor(burgerCost * 1.5);
 
     counterElement.textContent = `${counter}`;
