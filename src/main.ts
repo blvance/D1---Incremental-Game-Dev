@@ -32,11 +32,15 @@ document.body.innerHTML = `
 
 // Add click handler
 const button = document.getElementById("increment")!;
-const burgerUpgrade = document.getElementById("burgerUpgrade") as HTMLButtonElement;
+const burgerUpgrade = document.getElementById(
+  "burgerUpgrade",
+) as HTMLButtonElement;
 const counterElement = document.getElementById("counter")!;
 const burgerCostElement = document.getElementById("burgerCost")!;
 const burgerPowerElement = document.getElementById("burgerPower")!;
-const shrekUpgrade = document.getElementById("shrekUpgrade") as HTMLButtonElement;
+const shrekUpgrade = document.getElementById(
+  "shrekUpgrade",
+) as HTMLButtonElement;
 const shrekOwnedElement = document.getElementById("shrek")!;
 const shrekCostElement = document.getElementById("shrekCost")!;
 const shrekPowerElement = document.getElementById("shrekPower")!;
@@ -76,7 +80,7 @@ shrekUpgrade.addEventListener("click", () => {
 function updateButtonStates() {
   burgerUpgrade.disabled = counter < burgerCost;
   shrekUpgrade.disabled = counter < shrekCost;
-}  
+}
 
 function gameloop() {
   const now = Date.now();
