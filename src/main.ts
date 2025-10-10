@@ -169,8 +169,7 @@ pottyUpgrade.addEventListener("click", () => {
     pottyOwnedElement.textContent = `${potty}`;
   }
 });
-// --------------------------------------------------------- 
-
+// ---------------------------------------------------------
 
 // funtion to calculate DPS
 function calculateDPS() {
