@@ -1,12 +1,15 @@
-import exampleIconUrl from "./pooclick.png";
-import ShrekImg from "./shrek.png";
+import pooImg from "./pooclick.png";
 import PortaPottyImg from "./portaPotty.png";
+import ShrekImg from "./shrek.png";
 
 import "./style.css";
 
 // Simple counter for demonstration
 let counter: number = 0;
 let clickPower: number = 1;
+
+// dookie per second
+let DPS: number = 0;
 
 let burgerCost: number = 10;
 let burgerPower: number = 1;
@@ -21,29 +24,81 @@ let pottyPower: number = 0;
 
 let lastTime = Date.now();
 
-// Create basic HTML structure
+// Set up HTML structure
 document.body.innerHTML = `
-  <h1>Dookie Clicker</h1>
-  <p>Counter: <span id="counter">0</span></p>
-  <button id="increment"><img src="${exampleIconUrl}" class="icon" /></button>
-  
-  <p>Cost: <span id="burgerCost">${burgerCost}</span> +<span id="burgerPower">${burgerPower}</span> Dookie/Click<p>
-  <button id="burgerUpgrade">Eat a 🍔</button>
+  <div id="game-container" style="display: flex; height: 100vh; font-family: 'Comic Sans MS', sans-serif; background-color: #f9f9f9; color: #333;">
+    
+    <!-- LEFT SIDE: Main Clicker -->
+    <div id="clicker-area" style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; border-right: 3px solid #ccc; padding: 20px;">
+      <h1 style="font-size: 3em; margin-bottom: 10px;">💩 Dookie Clicker 💩</h1>
+      <p style="font-size: 1.5em;">Dookies: <span id="counter">0</span></p>
+      <p style="font-size: 1.2em;">Dookie Per Second: <span id="DPS">${DPS}</span></p>
 
-  <p>Cost: <span id="shrekCost">${shrekCost}</span> +<span id="shrekPower">${shrekPower}</span> per second <p>
-  <button id="shrekUpgrade"> <img src="${ShrekImg}" class="icon" /> </button>
+      <button id="increment" style="
+        background: none;
+        border: none;
+        cursor: pointer;
+        margin-top: 20px;
+        transition: transform 0.1s;
+      ">
+        <img src="${pooImg}" id="dookie-img" style="
+          width: 300px;
+          height: 300px;
+          border-radius: 50%;
+          box-shadow: 0 0 20px rgba(0,0,0,0.2);
+          transition: transform 0.1s;
+        " />
+      </button>
+    </div>
 
-  <p>Shreks Owned: <span id="shrek">${shrek}</span> </p>
+    <!-- RIGHT SIDE: Upgrades -->
+    <div id="upgrade-area" style="width: 400px; overflow-y: auto; background-color: #fff; box-shadow: -3px 0 10px rgba(0,0,0,0.1); padding: 20px;">
+      <h2 style="text-align: center; margin-bottom: 20px;">Upgrades</h2>
 
-  <p>Cost: <span id="pottyCost">${pottyCost}</span> +<span id="pottyPower">${pottyPower}</span> per second <p>
-  <button id="pottyUpgrade"> <img src="${PortaPottyImg}" class="icon" /> </button>
+      <!-- Burger Upgrade -->
+      <div class="upgrade-bar" style="display: flex; align-items: center; justify-content: space-between; background-color: #fffae5; border: 2px solid #ffcc00; border-radius: 10px; padding: 10px; margin-bottom: 15px;">
+        <div>
+          <h3 style="margin: 0;">🍔 Burger Boost</h3>
+          <p style="margin: 5px 0;">Cost: <span id="burgerCost">${burgerCost}</span></p>
+          <p style="margin: 0;">+<span id="burgerPower">${burgerPower}</span> Dookie/Click</p>
+        </div>
+        <button id="burgerUpgrade" style="background-color: #ffcc00; border: none; border-radius: 8px; padding: 10px 15px; font-weight: bold; cursor: pointer;">Eat 🍔</button>
+      </div>
 
-  <p>Porta Potties Owned: <span id="potty">${potty}</span> </p>
+      <!-- Shrek Upgrade -->
+      <div class="upgrade-bar" style="display: flex; align-items: center; justify-content: space-between; background-color: #e8ffe5; border: 2px solid #7ec850; border-radius: 10px; padding: 10px; margin-bottom: 15px;">
+        <div>
+          <h3 style="margin: 0;">🧅 Shrek Farm</h3>
+          <p style="margin: 5px 0;">Cost: <span id="shrekCost">${shrekCost}</span></p>
+          <p style="margin: 0;">+<span id="shrekPower">${shrekPower}</span> per second</p>
+          <p style="margin: 0;">Owned: <span id="shrek">${shrek}</span></p>
+        </div>
+        <button id="shrekUpgrade" style="background-color: #7ec850; border: none; border-radius: 8px; padding: 10px; cursor: pointer;">
+          <img src="${ShrekImg}" style="width: 60px; height: 60px;" />
+        </button>
+      </div>
+
+      <!-- Porta Potty Upgrade -->
+      <div class="upgrade-bar" style="display: flex; align-items: center; justify-content: space-between; background-color: #e5f5ff; border: 2px solid #5ac8fa; border-radius: 10px; padding: 10px; margin-bottom: 15px;">
+        <div>
+          <h3 style="margin: 0;">🚽 Porta Potty</h3>
+          <p style="margin: 5px 0;">Cost: <span id="pottyCost">${pottyCost}</span></p>
+          <p style="margin: 0;">+<span id="pottyPower">${pottyPower}</span> per second</p>
+          <p style="margin: 0;">Owned: <span id="potty">${potty}</span></p>
+        </div>
+        <button id="pottyUpgrade" style="background-color: #5ac8fa; border: none; border-radius: 8px; padding: 10px; cursor: pointer;">
+          <img src="${PortaPottyImg}" style="width: 60px; height: 60px;" />
+        </button>
+      </div>
+
+    </div>
+  </div>
 `;
 
 // Add click handler
 const button = document.getElementById("increment")!;
 const counterElement = document.getElementById("counter")!;
+const DPSCounterElement = document.getElementById("DPS")!;
 // burger elements
 const burgerCostElement = document.getElementById("burgerCost")!;
 const burgerPowerElement = document.getElementById("burgerPower")!;
@@ -57,7 +112,7 @@ const shrekUpgrade = document.getElementById(
 const shrekOwnedElement = document.getElementById("shrek")!;
 const shrekCostElement = document.getElementById("shrekCost")!;
 const shrekPowerElement = document.getElementById("shrekPower")!;
-//  Porta Potty Upgrade elements would go here
+//  Porta Potty Upgrade elements
 const pottyUpgrade = document.getElementById(
   "pottyUpgrade",
 ) as HTMLButtonElement;
@@ -70,6 +125,8 @@ button.addEventListener("click", () => {
   counterElement.textContent = `${counter}`;
 });
 
+// ---------------- Upgrade Event Listeners ----------------
+// burger upgrade event listener
 burgerUpgrade.addEventListener("click", () => {
   if (counter >= burgerCost) {
     counter -= burgerCost;
@@ -83,6 +140,7 @@ burgerUpgrade.addEventListener("click", () => {
   }
 });
 
+// shrek upgrade event listener
 shrekUpgrade.addEventListener("click", () => {
   if (counter >= shrekCost) {
     counter -= shrekCost;
@@ -97,6 +155,7 @@ shrekUpgrade.addEventListener("click", () => {
   }
 });
 
+// Port-a-Potty upgrade event listener
 pottyUpgrade.addEventListener("click", () => {
   if (counter >= pottyCost) {
     counter -= pottyCost;
@@ -106,17 +165,27 @@ pottyUpgrade.addEventListener("click", () => {
 
     counterElement.textContent = `${counter}`;
     pottyCostElement.textContent = `${pottyCost}`;
-    pottyPowerElement.textContent = `${pottyPower}`;  
+    pottyPowerElement.textContent = `${pottyPower}`;
     pottyOwnedElement.textContent = `${potty}`;
   }
 });
+// --------------------------------------------------------- 
 
+
+// funtion to calculate DPS
+function calculateDPS() {
+  DPS = shrekPower + pottyPower;
+  DPSCounterElement.textContent = `${DPS}`;
+}
+
+// function to update button states
 function updateButtonStates() {
   burgerUpgrade.disabled = counter < burgerCost;
   shrekUpgrade.disabled = counter < shrekCost;
   pottyUpgrade.disabled = counter < pottyCost;
 }
 
+// Game loop using requestAnimationFrame
 function gameloop() {
   const now = Date.now();
   const delta = (now - lastTime) / 1000; // seconds
@@ -131,7 +200,10 @@ function gameloop() {
   }
 
   lastTime = now;
+  //execute game loop tasks
   updateButtonStates();
+  calculateDPS();
+
   requestAnimationFrame(gameloop);
 }
 
