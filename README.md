@@ -6,7 +6,7 @@ The following app, Dookie Clicker, is a clicker game were the player clicks on a
 Implemented step 5 before the others on accident by making the Burger upgrade cost minus from the total number of Dookies. I also implemented the setInterval to make the Shrek autoclicker.
 
 10/10/25
-Made a requestAnimationFrame to smoothly animate the counter for the shrek auto clicker instead of setInterval. Added UI detail and pazzaz to give the gane a bit more feeling to the game. Playtested and made sure that numbers scale proportionalitly. Implemented that when the player doesn't have enough dookie the buttons disable.
+Made a requestAnimationFrame to smoothly animate the counter for the shrek auto clicker instead of setInterval. Added UI detail and pazzaz to give the gane a bit more feeling to the game. Playtested and made sure that numbers scale proportionalitly. Implemented that when the player doesn't have enough dookie the buttons disable. In a seperate commit Added another purchasable upgrade, the Port-a-Potty. This upgrade starts at 1000 dookie and give the player 10 clicks per Port-a-Potty.
 
 _Joshua Kim-Pearson_ - Added burger upgrade as a crossover from my burger clicker that ups the click power
 
