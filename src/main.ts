@@ -11,7 +11,7 @@ let clickPower: number = 1;
 // dookie per second
 let DPS: number = 0;
 
-// burger vars 
+// burger vars
 let burgerCost: number = 10;
 let burgerPower: number = 1;
 
@@ -174,7 +174,7 @@ pottyUpgrade.addEventListener("click", () => {
 });
 // ---------------------------------------------------------
 
-// funtion to calculate DPS (Dookie per second) 
+// funtion to calculate DPS (Dookie per second)
 function calculateDPS() {
   DPS = shrekPower + pottyPower;
   DPSCounterElement.textContent = `${DPS}`; // total growth rate
