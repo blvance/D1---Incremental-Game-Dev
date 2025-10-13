@@ -11,13 +11,16 @@ let clickPower: number = 1;
 // dookie per second
 let DPS: number = 0;
 
+// burger vars 
 let burgerCost: number = 10;
 let burgerPower: number = 1;
 
+//shrek vars
 let shrekCost: number = 100;
 let shrek: number = 0;
 let shrekPower: number = 0;
 
+// potty vars
 let pottyCost: number = 1000;
 let potty: number = 0;
 let pottyPower: number = 0;
@@ -68,7 +71,7 @@ document.body.innerHTML = `
       <!-- Shrek Upgrade -->
       <div class="upgrade-bar" style="display: flex; align-items: center; justify-content: space-between; background-color: #e8ffe5; border: 2px solid #7ec850; border-radius: 10px; padding: 10px; margin-bottom: 15px;">
         <div>
-          <h3 style="margin: 0;">🧅 Shrek Farm</h3>
+          <h3 style="margin: 0;">Shrek Farm</h3>
           <p style="margin: 5px 0;">Cost: <span id="shrekCost">${shrekCost}</span></p>
           <p style="margin: 0;">+<span id="shrekPower">${shrekPower}</span> per second</p>
           <p style="margin: 0;">Owned: <span id="shrek">${shrek}</span></p>
@@ -132,11 +135,11 @@ burgerUpgrade.addEventListener("click", () => {
     counter -= burgerCost;
     clickPower += 1;
     burgerPower += 1;
-    burgerCost = Math.floor(burgerCost * 1.25);
+    burgerCost = Math.floor(burgerCost * 1.25); // increasing the cost of Burgers by a factor of 25%
 
     counterElement.textContent = `${counter}`;
     burgerCostElement.textContent = `${burgerCost}`;
-    burgerPowerElement.textContent = `${burgerPower}`;
+    burgerPowerElement.textContent = `${burgerPower}`; // this var shows growth rate
   }
 });
 
@@ -146,11 +149,11 @@ shrekUpgrade.addEventListener("click", () => {
     counter -= shrekCost;
     shrek += 1;
     shrekPower = shrek * 2;
-    shrekCost = Math.floor(shrekCost * 1.4) + 25;
+    shrekCost = Math.floor(shrekCost * 1.4); // increasing the cost of Shreks by a factor of 40%
 
     counterElement.textContent = `${counter}`;
     shrekCostElement.textContent = `${shrekCost}`;
-    shrekPowerElement.textContent = `${shrekPower}`;
+    shrekPowerElement.textContent = `${shrekPower}`; // this var shows growth rate
     shrekOwnedElement.textContent = `${shrek}`;
   }
 });
@@ -161,20 +164,20 @@ pottyUpgrade.addEventListener("click", () => {
     counter -= pottyCost;
     potty += 1;
     pottyPower = potty * 10;
-    pottyCost = Math.floor(pottyCost * 1.6) + 75;
+    pottyCost = Math.floor(pottyCost * 1.5); // increasing the cost of Shreks by a factor of 50%
 
     counterElement.textContent = `${counter}`;
     pottyCostElement.textContent = `${pottyCost}`;
-    pottyPowerElement.textContent = `${pottyPower}`;
+    pottyPowerElement.textContent = `${pottyPower}`; // this var shows growth rate
     pottyOwnedElement.textContent = `${potty}`;
   }
 });
 // ---------------------------------------------------------
 
-// funtion to calculate DPS
+// funtion to calculate DPS (Dookie per second) 
 function calculateDPS() {
   DPS = shrekPower + pottyPower;
-  DPSCounterElement.textContent = `${DPS}`;
+  DPSCounterElement.textContent = `${DPS}`; // total growth rate
 }
 
 // function to update button states
