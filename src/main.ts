@@ -51,7 +51,6 @@ const availableItems: Item[] = [
     description:
       "Increases Dookie per second by 10 by having a your own portable toilet. Perfect for on-the-go pooping!",
   },
-  
 ];
 
 const imageMap: Record<string, string> = {
