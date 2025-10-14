@@ -1,7 +1,9 @@
 import BurgerImg from "./burger.png";
 import pooImg from "./pooclick.png";
 import PortaPottyImg from "./portaPotty.png";
+import SewagePlant from "./SewagePlant.png";
 import ShrekImg from "./shrek.png";
+import TacoBellImg from "./tacobell.png";
 
 import "./style.css";
 
@@ -39,7 +41,7 @@ const availableItems: Item[] = [
     type: "auto",
     img: "ShrekImg",
     description:
-      "Increases Dookie per second by 2 by having Shrek be on the toilet for you",
+      "help increase Dookie per second by having Shrek sit on the toilet for you",
   },
   {
     name: "Port-a-Potty",
@@ -49,7 +51,27 @@ const availableItems: Item[] = [
     type: "auto",
     img: "PortaPottyImg",
     description:
-      "Increases Dookie per second by 10 by having a your own portable toilet. Perfect for on-the-go pooping!",
+      "help increases Dookie per second by having a your own portable toilet. Perfect for on-the-go pooping events!",
+  },
+  {
+    name: "TacoBell",
+    cost: 5000,
+    power: 50,
+    quantity: 0,
+    type: "auto",
+    img: "TacoBellImg",
+    description:
+      "Increases Dookie per second by building a Taco Bell, where poop is made fresh daily.",
+  },
+  {
+    name: "Sewage Plant",
+    cost: 10000,
+    power: 100,
+    quantity: 0,
+    type: "auto",
+    img: "SewagePlant",
+    description:
+      "Increases Dookie per second by building a sewage treatment plant. poop = profit",
   },
 ];
 
@@ -58,6 +80,8 @@ const imageMap: Record<string, string> = {
   BurgerImg,
   ShrekImg,
   PortaPottyImg,
+  TacoBellImg,
+  SewagePlant,
 };
 
 // Step 1: Render main HTML
