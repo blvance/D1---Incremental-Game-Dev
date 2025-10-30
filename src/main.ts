@@ -1,4 +1,4 @@
-   import BurgerImg from "./burger.png";
+import BurgerImg from "./burger.png";
 import pooImg from "./pooclick.png";
 import PortaPottyImg from "./portaPotty.png";
 import SewagePlant from "./SewagePlant.png";
@@ -195,7 +195,7 @@ function updateDPS() {
 function updateButtonStates() {
   // loop through each item and get button element
   availableItems.forEach((item) => {
-    const btn = document.getElementById(`${item.name}Upgrade`)!; 
+    const btn = document.getElementById(`${item.name}Upgrade`)!;
     if (counter >= item.cost) {
       btn.removeAttribute("disabled");
     } else {
