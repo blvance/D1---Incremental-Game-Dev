@@ -88,19 +88,24 @@ let DPS: number = 0; // total auto Dookies/sec
 let lastTime = Date.now(); // for delta timing
 
 // UI: Render game container and core elements
-document.body.innerHTML = `
-  <div id="game-container" style="display: flex; height: 100vh; font-family: 'Comic Sans MS', sans-serif; background-color: #f9f9f9; color: #333;">
+// added background color and changed font to better bring UI theme together, inspired by https://github.com/jellyb3e/cmpm-121-f25-d1-juliamanou
+document.body.innerHTML = ` 
+  <div id="game-container"
+      style="display: flex; height: 100vh;
+      font-family: 'Comic Sans MS', sans-serif; 
+      background-color: rgba(117, 78, 50, 0.6); 
+      color: #fff;">
     <div id="clicker-area" style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; border-right: 3px solid #ccc; padding: 20px;">
       <h1 style="font-size: 3em; margin-bottom: 10px;">💩 Dookie Clicker 💩</h1>
       <p style="font-size: 1.5em;">Dookies: <span id="counter">0</span></p>
       <p style="font-size: 1.2em;">Dookie Per Second: <span id="DPS">${DPS}</span></p>
 
       <button id="increment" style="background: none; border: none; cursor: pointer; margin-top: 20px;">
-        <img src="${pooImg}" id="dookie-img" style="width: 300px; height: 300px; border-radius: 50%; box-shadow: 0 0 20px rgba(0,0,0,0.2);" />
+        <img src="${pooImg}" id="dookie-pop" style="width: 300px; height: 300px; border-radius: 50%; box-shadow: 0 0 20px rgba(255, 255, 255, 0.93);" />
       </button>
     </div>
 
-    <div id="upgrade-area" style="width: 300px; border-left: 3px solid #ccc; padding: 20px; overflow-y: auto;">
+    <div id="upgrade-area" style="width: 300px; border-left: 3px solid #ffffffff; padding: 20px; overflow-y: auto;">
       <h2 style="text-align: center; margin-bottom: 20px;">Upgrades</h2>
     </div>
 
@@ -129,7 +134,7 @@ availableItems.forEach((item) => {
     imageMap[item.icon]
   }" style="width: 60px; height: 60px;" />`}
       </button>
-      <p style="font-size:0.95em; color:#555; margin:6px 0 0 0;">${item.description}</p>
+      <p style="font-size:0.95em; color:#f5deb3; margin:6px 250 250 250;">${item.description}</p>
     </div>
   `;
   upgradeArea.innerHTML += upgradeHTML;
@@ -139,11 +144,15 @@ availableItems.forEach((item) => {
 const counterElement = document.getElementById("counter")!;
 const DPSCounterElement = document.getElementById("DPS")!;
 const button = document.getElementById("increment")!;
+const dookieImg = document.getElementById("dookie-pop") as HTMLImageElement;
 
-// Add click handler
+// Add click handler for main button
 button.addEventListener("click", () => {
   counter += clickPower;
   counterElement.textContent = `${Math.floor(counter)}`;
+
+  /* pop animation for the dookie image when clicked, inspired by https://github.com/t4ylo/cmpm-121-25-d1-taylorpearce */
+  animateDookiePop();
 });
 
 // Upgrade listeners
@@ -178,6 +187,11 @@ availableItems.forEach((item) => {
     }
   });
 });
+function animateDookiePop() {
+  dookieImg.classList.remove("pop");
+  void dookieImg.offsetWidth;
+  dookieImg.classList.add("pop");
+}
 
 // Calculate total DPS
 function updateDPS() {

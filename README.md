@@ -16,4 +16,7 @@ Burger Upgrade: Spend points to increase your click power, making each click mor
 Shrek Upgrade: Buy Shreks to generate points automatically over time. The more Shreks you own, the faster your counter grows.
 Live UI Updates: All upgrades and counters update in real time.
 Smooth Animation: Uses requestAnimationFrame for smooth, frame-rate-independent automatic growth.
-How to Play
+
+I drew inspiration from [Taylor Pearce’s CMPM 121 D1 project](https://github.com/t4ylo/cmpm-121-25-d1-taylorpearce/blob/main/src/style.css). This project was a honey farmer with a bee as the main clicker. Me and my girlfriend call each other bee so that drew my eye to click on the demo. Then when I opened up the demo I clicked the bee and I loved the feedback it gave me when I clicked it. It shook the bee into the honeycomb and also gave me a number pop up so I knew exactly how much I was getting with each click. I liked this so I applied it to my clicker, it is a circle so I thought the best application would be to have it pulse on each click.
+
+I also found inspiration from [Julia Manou’s CMPM 121 D1 project](https://github.com/jellyb3e/cmpm-121-f25-d1-juliamanou). I found inspiration form this project in how its UI actually looked. All of it was very connected and nothing was just blank which added a lot to the feeling of the game. I thought I could apply this to my game by putting the background as a bathroom so it felt like the user was more present witht he game. With that I had to change my game container box to a transparent brown so that the background was visible but not just placed there with no effect.
